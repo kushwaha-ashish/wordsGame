@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WORD GAME</title>
+</head>
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<style type="text/css">
+	body {
+		background-color: #222222;
+	}
+
+	#blocksContainer {
+		height: 50vh;
+		//background-color: red;
+	}
+
+	#wordContainer {
+		height: 50vh;
+	}
+
+	#wordType {
+		height: 12vh;
+		background-color: white;
+		border-radius: 10px;
+		border: solid 5px white;
+		background-color: #999999;
+	}
+
+	.block, .interfaceButton, .submitButton {
+		height: 10vh;
+		width: 10vh;
+		border-radius: 10px;
+		border: solid 5px white;
+		background-color: #999999;
+	}
+
+	.interfaceButton {
+		width: 20vh;
+	}
+
+	#backSpaceButton {
+		height: 5vh;
+		width: 10vh;
+	}
+
+	.submitButton {
+		width: 30vh;
+	}
+
+	#meaningText {
+		color: white;
+	}
+
+
+</style>
+<body>
+	<div id="blocksContainer" class="container-fluid d-flex align-items-center">
+		<div class="container">
+			<div class="d-flex justify-content-center">
+				<!--if you change number of block div, it will needs change in script also-->
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let01"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let02"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let03"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let04"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let05"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let06"><p class="h1">Z</p></div>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let07"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let08"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let09"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let10"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let11"><p class="h1">Z</p></div>
+				<div class="m-3 block d-flex align-items-center justify-content-center" id="let12"><p class="h1">Z</p></div>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<div class="m-3 interfaceButton d-flex align-items-center justify-content-center" onclick="backSpaceB()">
+					<div id="backSpaceButton" class="d-flex align-items-center justify-content-center">
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="backspace" class="svg-inline--fa fa-backspace fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 64H205.26A63.97 63.97 0 0 0 160 82.75L9.37 233.37c-12.5 12.5-12.5 32.76 0 45.25L160 429.25c12 12 28.28 18.75 45.25 18.75H576c35.35 0 64-28.65 64-64V128c0-35.35-28.65-64-64-64zm-84.69 254.06c6.25 6.25 6.25 16.38 0 22.63l-22.62 22.62c-6.25 6.25-16.38 6.25-22.63 0L384 301.25l-62.06 62.06c-6.25 6.25-16.38 6.25-22.63 0l-22.62-22.62c-6.25-6.25-6.25-16.38 0-22.63L338.75 256l-62.06-62.06c-6.25-6.25-6.25-16.38 0-22.63l22.62-22.62c6.25-6.25 16.38-6.25 22.63 0L384 210.75l62.06-62.06c6.25-6.25 16.38-6.25 22.63 0l22.62 22.62c6.25 6.25 6.25 16.38 0 22.63L429.25 256l62.06 62.06z"></path></svg>
+					</div>
+				</div>
+				<div class="m-3 submitButton d-flex justify-content-center"><p class="h2" onclick="wordcheck()">Submit</p></div>
+				<div class="m-3 interfaceButton d-flex justify-content-center"><p class="h2" onclick="wordskip()">Skip</p></div>
+			</div>
+		</div>
+	
+	</div>
+
+	<div id="wordContainer" class="container-fluid">
+		<div class="row pt-4">
+			<div class="col-md-3"></div>
+			<div class="col-md-6 p-4 d-flex align-items-center justify-content-center h1" id="wordType">
+				<div class="h1" id="answerText">test</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+		
+		<div class="d-flex justify-content-center h1" id="meaningText">meaning</div>
+	</div>
+
+	<script type="text/javascript" src="wrdList1.js"></script>
+	<script type="text/javascript">
+		const nScramble = 12;
+
+		const engChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+						'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+		function stringMixScramble(x) {
+			x = x.split('');
+
+			var arrayLength = x.length;
+			
+			for (i = 0; i < (nScramble - arrayLength); i++) {
+				x.push(engChars[Math.floor(Math.random()*26)]);
+			};
+
+			var arrayLength = x.length;
+
+			var xNew = [];
+
+			var scrambledArray = [];
+
+			x.forEach(
+				(d, i) => {
+					while(true) {
+						s = Math.floor(Math.random()*arrayLength);
+						if (!scrambledArray.includes(s)) {
+							scrambledArray[i] = s
+							break;
+						}					
+					}
+				});
+
+			scrambledArray.forEach((d, i) => xNew[i] = x[d])
+
+			return(xNew);
+
+		};
+
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		var askedWords = [];
+		var ni, w1, w2;
+		var textBoxContent;
+		var clickedBlocksIdList = [];
+		var blockContents;
+
+		function onClickStringFill() {
+			textBoxContent.textContent = textBoxContent.textContent + this.textContent;
+			this.style.opacity = 0.1;
+			this.removeEventListener('click', onClickStringFill, true);
+			clickedBlocksIdList.push(this.id);
+		};
+
+		function wordRefresh() {
+			ni = Math.floor(Math.random()*lvl1.words.length);
+
+			while(askedWords.includes(ni)) {
+				ni = Math.floor(Math.random()*lvl1.words.length);
+
+			}
+			askedWords.push(ni);
+
+			w1 = lvl1.words[ni];
+			w2 = lvl1.meanings[ni];
+
+
+			document.getElementById('wordType').style.background = '#999999';
+
+			document.getElementById('meaningText').textContent = w2; 
+			textBoxContent = document.getElementById('answerText');
+
+			if (w1.length > 6) {nDisp = 3} else {nDisp = 2};
+
+			textBoxContent.textContent = w1.substr(0, nDisp);
+			blockScramble = stringMixScramble(w1.substr(nDisp));
+
+			clickedBlocksIdList = [];
+
+			blockContents = document.querySelectorAll('.block');
+			blockContents.forEach((d, i) => {
+				d.firstElementChild.innerText = blockScramble[i];
+				d.style.opacity = 1;
+				d.addEventListener('click', onClickStringFill, true);
+			});
+		};
+
+		function backSpaceB() {
+			p = textBoxContent.textContent;
+			if (textBoxContent.textContent.length > 3) {
+				textBoxContent.textContent = p.substr(0, p.length - 1)
+				
+				restoreBlock = document.getElementById(clickedBlocksIdList[clickedBlocksIdList.length - 1]);
+				restoreBlock.addEventListener('click', onClickStringFill, true);
+				restoreBlock.style.opacity = 1;
+				clickedBlocksIdList.pop();
+			}
+		}
+
+		function wordcheck() {
+			if (textBoxContent.textContent == w1) {
+				document.getElementById('wordType').style.background = 'green';
+			}
+
+			else {
+				textBoxContent.textContent = w1;
+				document.getElementById('wordType').style.background = 'red';
+			}
+
+			setTimeout(() => wordRefresh(), 600);
+			
+		}
+
+		wordRefresh();
+
+	</script>
+</body>
+</html>
